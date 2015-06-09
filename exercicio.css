@@ -1,7 +1,10 @@
 /* Exercício 1: Criar uma transição para quando o mouse estiver em cima dos
  * botões play/stop (para que o elemento se revele lentamente)
  */
- #controles ul {}
+ #controles ul {
+    -webkit-transition: transform 1s;
+     transition: transform 1s;
+ }
 
 /*
  * Exercício 2: Você deve implementar uma metáfora visual para cada um dos 4
@@ -11,17 +14,78 @@
  *   - perturbado: animal fica pulsando
  *   - instinto-selvagem: animal dá um salto e cresce, com uma borda vermelha
  */
-.agitado {}
-.agitado img {}
+.agitado {
+    -webkit-animation: piscando .5s ease-in-out 0s infinite alternate;
+    animation: piscando .5s ease-in-out 0s infinite alternate;
+}
+.agitado img {
+    border: 5px solid #FFAA33;
 
-.alimentado {}
-.alimentado img {}
+}
+@-webkit-keyframes piscando {
+  from { opacity: 1.0; }
+  to   { opacity: 0.5; }
+}
+@keyframes piscando {
+  from { opacity: 1.0; }
+  to   { opacity: 0.5; }
+}
 
-.perturbado {}
-.perturbado img {}
+.alimentado {
+    -webkit-animation: rodando .5s ease-in-out 0s infinite alternate;
+    animation: rodando .5s ease-in-out 0s infinite alternate;
+}
+@-webkit-keyframes rodando {
+  from { transform: rotate(30deg); }
+  to   { transform: rotate(-30deg); }
+}
+@keyframes rodando {
+  from { transform: rotate(30deg); }
+  to   { transform: rotate(-30deg); }
+}
+.alimentado img {
+    border: 5px solid #33FF33;
+}
 
-.instinto-selvagem {}
-.instinto-selvagem img {}
+.perturbado {    
+    -webkit-animation: pulsando .5s ease-in-out 0s infinite alternate;
+    animation: pulsando .5s ease-in-out 0s infinite alternate;
+}
+@-webkit-keyframes pulsando {
+  from { transform: scale(0.7); }
+  to   { transform: scale(1); }
+}
+@keyframes pulsando {
+  from { transform: scale(0.7); }
+  to   { transform: scale(1); }
+}
+.perturbado img {
+    border: 5px solid #FFFF33;
+}
+
+.instinto-selvagem {
+    -webkit-animation: atacando 0.5s ease-in-out 0s 2 alternate;
+    animation: atacando 0.5s ease-in-out 0s 2 alternate;
+}
+@-webkit-keyframes atacando {
+  from { 
+    transform: scale(1) translateY(20px);
+  }
+  to{ 
+    transform: scale(1.4) translateY(-20px);
+  }
+}
+@keyframes atacando {
+  from { 
+    transform: scale(1) translateY(20px);
+  }
+  to   { 
+    transform: scale(1.4) translateY(-20px);      
+  }
+}
+.instinto-selvagem img {
+    border: 5px solid #FF3333;
+}
 
 /*
  * Exercício 3: Criar uma imagem sprite com as imagens dos botões de controle
@@ -32,8 +96,19 @@
  */
 
 .comecar,
-.parar {}
+.parar {
+  height: 1em;
+  width: 1em;
+  display: inline-block;
+  vertical-align: middle;
+}
 
-.comecar {}
+.comecar {
+    background-image: url('imgs/sprite_actions.png');
+    background-position: 0px 0px;
+}
 
-.parar {}
+.parar {
+    background-image: url('imgs/sprite_actions.png');
+    background-position: 0px -34px;
+}
